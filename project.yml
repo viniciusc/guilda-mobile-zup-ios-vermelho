@@ -21,9 +21,9 @@ settings:
     debugEnabled: false
   
 packages:
-  Alamofire:
-    url: https://github.com/Alamofire/Alamofire.git
-    version: 5.6.1
+  ComposableArchitecture:
+    url: https://github.com/pointfreeco/swift-composable-architecture.git
+    version: 1.0.0
 
 targets:
   IMDBCatalog:
@@ -34,7 +34,7 @@ targets:
     settings:
       INFOPLIST_FILE: info.plist
     dependencies:
-      - package: Alamofire
+      - package: ComposableArchitecture
 schemes: 
     IMDBCatalogDebug:
       build:
