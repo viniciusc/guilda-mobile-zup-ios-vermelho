@@ -1,10 +1,6 @@
-//
-//  MoviewViewModel.swift
-//  IMDBCatalog
-//
-//  Created by Ewerton Pereira on 11/06/24.
-//
-
+// // MoviewViewModel.swift
+// IMDBCatalog
+// // Created by Ewerton Pereira on 11/06/24.
 import SwiftUI
 import Combine
 
@@ -13,11 +9,14 @@ class MoviesViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     func fetchMovies() {
-        guard let url = URL(string: "https://imdb-api.com/en/API/Top250Movies/6843df26f45e3eed2352b62f54747473") else { return }
+        // Substitua "YOUR_API_KEY" pela sua chave de API do TMDB
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=6843df26f45e3eed2352b62f54747473&language=en-US&page=1") else {
+            return
+        }
         
         URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
-            .decode(type: IMDBResponse.self, decoder: JSONDecoder())
+            .decode(type: TMDBResponse.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -27,17 +26,20 @@ class MoviesViewModel: ObservableObject {
                     break
                 }
             }, receiveValue: { [weak self] response in
-                self?.movies = response.items.map { Movie(title: $0.title, coverImageName: $0.image) }
+                let baseURL = "https://image.tmdb.org/t/p/w500" // URL base para as imagens
+                self?.movies = response.results.map { 
+                    Movie(title: $0.title, coverImageName: "\(baseURL)\($0.poster_path)") 
+                }
             })
             .store(in: &cancellables)
     }
 }
 
-struct IMDBResponse: Codable {
-    let items: [IMDBMovie]
+struct TMDBResponse: Codable {
+    let results: [TMDBMovie]
 }
 
-struct IMDBMovie: Codable {
+struct TMDBMovie: Codable {
     let title: String
-    let image: String
+    let poster_path: String
 }
