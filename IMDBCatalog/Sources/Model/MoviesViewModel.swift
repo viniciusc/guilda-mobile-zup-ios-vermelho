@@ -1,22 +1,35 @@
-// // MoviewViewModel.swift
-// IMDBCatalog
-// // Created by Ewerton Pereira on 11/06/24.
 import SwiftUI
 import Combine
 
 class MoviesViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
+    @Published var topRatedMovies: [Movie] = []
+    @Published var upcomingMovies: [Movie] = []
+    @Published var nowPlayingMovies: [Movie] = []
+    
     private var cancellables = Set<AnyCancellable>()
+    private let apiKey = "6843df26f45e3eed2352b62f54747473" // Replace with your actual API key
     
     func fetchMovies() {
-        // Substitua "YOUR_API_KEY" pela sua chave de API do TMDB
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=6843df26f45e3eed2352b62f54747473&language=en-US&page=1") else {
-            return
+        fetchMovies(for: .topRated) { [weak self] movies in
+            self?.topRatedMovies = movies
         }
+        fetchMovies(for: .upcoming) { [weak self] movies in
+            self?.upcomingMovies = movies
+        }
+        fetchMovies(for: .nowPlaying) { [weak self] movies in
+            self?.nowPlayingMovies = movies
+        }
+    }
+    
+    private func fetchMovies(for category: MovieCategory, completion: @escaping ([Movie]) -> Void) {
+        guard let url = url(for: category) else { return }
+        
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
         URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
-            .decode(type: TMDBResponse.self, decoder: JSONDecoder())
+            .decode(type: TMDBResponse.self, decoder: jsonDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -25,14 +38,41 @@ class MoviesViewModel: ObservableObject {
                 case .finished:
                     break
                 }
-            }, receiveValue: { [weak self] response in
-                let baseURL = "https://image.tmdb.org/t/p/w500" // URL base para as imagens
-                self?.movies = response.results.map { 
-                    Movie(title: $0.title, coverImageName: "\(baseURL)\($0.poster_path)") 
+            }, receiveValue: { response in
+                let baseURL = "https://image.tmdb.org/t/p/w500"
+                let movies = response.results.map { 
+                    Movie(
+                        title: $0.title, 
+                        coverImageName: "\(baseURL)\($0.posterPath)", 
+                        releaseDate: $0.releaseDate, 
+                        overview: $0.overview,
+                        popularity: $0.popularity
+                    ) 
                 }
+                completion(movies)
             })
             .store(in: &cancellables)
     }
+    
+    private func url(for category: MovieCategory) -> URL? {
+        let baseURL = "https://api.themoviedb.org/3/movie/"
+        let categoryPath: String
+        switch category {
+        case .topRated:
+            categoryPath = "top_rated"
+        case .upcoming:
+            categoryPath = "upcoming"
+        case .nowPlaying:
+            categoryPath = "now_playing"
+        }
+        return URL(string: "\(baseURL)\(categoryPath)?api_key=\(apiKey)&language=en-US&page=1")
+    }
+}
+
+enum MovieCategory {
+    case topRated
+    case upcoming
+    case nowPlaying
 }
 
 struct TMDBResponse: Codable {
@@ -41,5 +81,8 @@ struct TMDBResponse: Codable {
 
 struct TMDBMovie: Codable {
     let title: String
-    let poster_path: String
+    let posterPath: String
+    let releaseDate: String
+    let overview: String
+    let popularity: Double // New property
 }

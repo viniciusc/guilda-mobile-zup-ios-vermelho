@@ -17,31 +17,12 @@ struct MoviesView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Spacer()
-                Text("Lançamentos").padding([.leading], 15)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 4) {
-                        ForEach(viewModel.movies) { movie in
-                            ListItemView(movie: movie)
-                        }
-                    }
-                    .padding()
-                    .background(Color.black) // Fundo preto para o HStack
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    createMovieSection(title: "Lançamentos", movies: viewModel.nowPlayingMovies)
+                    createMovieSection(title: "Mais assistidos", movies: viewModel.topRatedMovies)
+                    createMovieSection(title: "Em Breve", movies: viewModel.upcomingMovies)
                 }
-
-                Text("Mais assistidos").padding([.leading], 15)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 4) {
-                        ForEach(viewModel.movies) { movie in
-                            ListItemView(movie: movie)
-                        }
-                    }
-                    .padding()
-                    .background(Color.black) // Fundo preto para o HStack
-                }
-                Spacer()
-
             }
             .background(Color.black) // Fundo preto para o ScrollView
             .navigationTitle("Movies")
@@ -51,6 +32,26 @@ struct MoviesView: View {
         }
         .background(Color.black) // Fundo preto para a NavigationView
         .foregroundColor(.white) // Texto branco para o conteúdo da NavigationView
+    }
+    
+    private func createMovieSection(title: String, movies: [Movie]) -> some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.system(size: 20, weight: .bold)) // Tamanho maior e negrito
+                .foregroundColor(Color(red: 242/255, green: 201/255, blue: 76/255)) // Cor personalizada usando RGB
+                .padding([.leading], 15)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 4) {
+                    ForEach(movies) { movie in
+                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            ListItemView(movie: movie)
+                        }
+                    }
+                }
+                .padding()
+                .background(Color.black) // Fundo preto para o HStack
+            }
+        }
     }
 }
 

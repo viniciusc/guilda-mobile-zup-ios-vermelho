@@ -33,7 +33,7 @@ struct ListItemView: View {
 
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ListItemView(movie: Movie(title: "Sample Movie Test With Bigger title", coverImageName: "moviecover"))
+        ListItemView(movie: Movie(title: "Sample Movie Test With Bigger title", coverImageName: "moviecover", releaseDate: "10-10-2024", overview: "Sample overview", popularity: 10))
             .previewLayout(.sizeThatFits)
             .padding()
     }

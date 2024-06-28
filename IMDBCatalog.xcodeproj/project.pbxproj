@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D7BD9AFFC25375416C58F93 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C1DFA2465CCDAC423BF9670C /* Alamofire */; };
+		6BAA82282C2F47A100943CA3 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA82272C2F47A100943CA3 /* MovieDetailView.swift */; };
 		6BBF17422C18CD42009DF33B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF17412C18CD42009DF33B /* ContentView.swift */; };
 		6BBF17442C18CD51009DF33B /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF17432C18CD51009DF33B /* MoviesView.swift */; };
 		6BBF17462C18CD5F009DF33B /* SeriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF17452C18CD5F009DF33B /* SeriesView.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		01B88837EE5090307C1FAB4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6BAA82272C2F47A100943CA3 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		6BBF17412C18CD42009DF33B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6BBF17432C18CD51009DF33B /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		6BBF17452C18CD5F009DF33B /* SeriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				6BBF17432C18CD51009DF33B /* MoviesView.swift */,
 				6BBF17452C18CD5F009DF33B /* SeriesView.swift */,
 				6BBF17472C18CF51009DF33B /* ListItemView.swift */,
+				6BAA82272C2F47A100943CA3 /* MovieDetailView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				6BBF174B2C18CF79009DF33B /* Movie.swift in Sources */,
 				6BBF17462C18CD5F009DF33B /* SeriesView.swift in Sources */,
 				6BBF17442C18CD51009DF33B /* MoviesView.swift in Sources */,
+				6BAA82282C2F47A100943CA3 /* MovieDetailView.swift in Sources */,
 				B516F52EB5F1C2DB1B7B4B78 /* IMDBCatalogApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

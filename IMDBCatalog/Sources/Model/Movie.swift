@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct Movie: Identifiable {
-    var id = UUID()
-    var title: String
-    var coverImageName: String
+    let id = UUID()
+    let title: String
+    let coverImageName: String
+    let releaseDate: String
+    let overview: String
+    let popularity: Double // New property
 }
