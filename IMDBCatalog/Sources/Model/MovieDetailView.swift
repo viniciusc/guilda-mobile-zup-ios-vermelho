@@ -5,7 +5,7 @@ struct MovieDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            AsyncImage(url: URL(string: movie.coverImageName)) { image in
+            AsyncImage(url: URL(string: movie.backdropImageName)) { image in
                 image.resizable()
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
@@ -28,7 +28,7 @@ struct MovieDetailView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.red)
-                    Text("\(movie.popularity, specifier: "%.2f")")
+                    Text("\(movie.popularity, specifier: "%.f")")
                         .font(.subheadline)
                         .foregroundColor(.white)
                 }

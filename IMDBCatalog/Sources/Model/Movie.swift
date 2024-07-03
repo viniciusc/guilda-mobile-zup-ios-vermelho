@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-
-struct Movie: Identifiable {
-    let id = UUID()
-    let title: String
-    let coverImageName: String
-    let releaseDate: String
-    let overview: String
-    let popularity: Double // New property
-}
+//
+//struct Movie: Identifiable {
+//    let id = UUID()
+//    let title: String
+//    let coverImageName: String
+//    let releaseDate: String
+//    let overview: String
+//    let popularity: Double // New property
+//}
