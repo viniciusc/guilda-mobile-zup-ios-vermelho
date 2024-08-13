@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 class SeriesViewModel: ObservableObject {
-    @Published var series: [Serie] = []
+    @Published var series: [MediaItem] = []
 
     private var cancellables = Set<AnyCancellable>()
     private let apiKey = "6843df26f45e3eed2352b62f54747473" // Replace with your actual API key
@@ -17,7 +17,7 @@ class SeriesViewModel: ObservableObject {
 
         URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
-            .decode(type: TMDBSeriesResponse.self, decoder: jsonDecoder)
+            .decode(type: SeriesResponse.self, decoder: jsonDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -29,7 +29,7 @@ class SeriesViewModel: ObservableObject {
             }, receiveValue: { response in
                 let baseURL = "https://image.tmdb.org/t/p/w500"
                 self.series = response.results.map { 
-                    Serie(
+                    MediaItem(
                         title: $0.name, 
                         coverImageName: "\(baseURL)\($0.posterPath)",
                         backdropImageName: "\(baseURL)\($0.backdropPath)",
@@ -43,27 +43,15 @@ class SeriesViewModel: ObservableObject {
     }
 }
 
-struct TMDBSeriesResponse: Codable {
-    let results: [TMDBSerie]
+struct SeriesResponse: Codable {
+    let results: [SerieItemResponse]
 }
 
-struct TMDBSerie: Codable {
+struct SerieItemResponse: Codable {
     let name: String
     let posterPath: String
     let backdropPath: String // New property
     let firstAirDate: String
     let overview: String
     let popularity: Double
-}
-
-struct Serie: Identifiable {
-    let id = UUID()
-    let title: String
-    let coverImageName: String
-    let backdropImageName: String // New property
-    let releaseDate: String
-    let overview: String
-    let popularity: Double
-
-    var releaseDateFormatted: String { return releaseDate.toBrazilianDateFormat() }
 }

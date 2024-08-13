@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  MediaItem.swift
 //  IMDBCatalog
 //
 //  Created by Ewerton Pereira on 11/06/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 //
-//struct Movie: Identifiable {
+//struct MediaItem: Identifiable {
 //    let id = UUID()
 //    let title: String
 //    let coverImageName: String

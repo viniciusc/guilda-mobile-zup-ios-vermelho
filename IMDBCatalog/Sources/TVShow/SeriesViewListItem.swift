@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SeriesListItemView: View {
-    var serie: Serie
+    var serie: MediaItem
 
     var body: some View {
         NavigationLink(destination: SeriesDetailView(serie: serie)) {
@@ -31,7 +31,7 @@ struct SeriesListItemView: View {
 
 struct SeriesListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesListItemView(serie: Serie(
+        SeriesListItemView(serie: MediaItem(
             title: "Sample Series", 
             coverImageName: "https://via.placeholder.com/500", backdropImageName: "https://via.placeholder.com/500",
             releaseDate: "2023-10-01",

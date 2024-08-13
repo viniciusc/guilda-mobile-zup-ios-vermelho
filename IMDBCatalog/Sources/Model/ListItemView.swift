@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ListItemView: View {
-    var movie: Movie
+    var movie: MediaItem
 
     var body: some View {
         HStack {
@@ -33,7 +33,7 @@ struct ListItemView: View {
 
 struct ListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ListItemView(movie: Movie(title: "Sample Movie Test With Bigger title", coverImageName: "moviecover", backdropImageName: "", releaseDate: "10-10-2024", overview: "Sample overview", popularity: 10))
+        ListItemView(movie: MediaItem(title: "Sample MediaItem Test With Bigger title", coverImageName: "moviecover", backdropImageName: "", releaseDate: "10-10-2024", overview: "Sample overview", popularity: 10))
             .previewLayout(.sizeThatFits)
             .padding()
     }

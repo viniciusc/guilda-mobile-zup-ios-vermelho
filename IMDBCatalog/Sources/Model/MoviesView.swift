@@ -34,7 +34,7 @@ struct MoviesView: View {
         .foregroundColor(.white) // Texto branco para o conteúdo da NavigationView
     }
     
-    private func createMovieSection(title: String, movies: [Movie]) -> some View {
+    private func createMovieSection(title: String, movies: [MediaItem]) -> some View {
         VStack(alignment: .leading) {
             Text(title)
                 .font(.system(size: 20, weight: .bold)) // Tamanho maior e negrito

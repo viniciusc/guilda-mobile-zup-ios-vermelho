@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MovieDetailView: View {
-    var movie: Movie
+    var movie: MediaItem
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {

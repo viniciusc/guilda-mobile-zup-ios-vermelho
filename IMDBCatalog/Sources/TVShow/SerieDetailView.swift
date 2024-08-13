@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SeriesDetailView: View {
-    var serie: Serie
+    var serie: MediaItem
 
     var body: some View {
         VStack {
@@ -38,7 +38,7 @@ struct SeriesDetailView: View {
 
 struct SeriesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesDetailView(serie: Serie(
+        SeriesDetailView(serie: MediaItem(
             title: "Sample Series",
             coverImageName: "https://via.placeholder.com/500",
             backdropImageName: "https://via.placeholder.com/500", // Sample backdrop image

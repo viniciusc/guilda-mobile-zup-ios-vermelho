@@ -26,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		01B88837EE5090307C1FAB4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B133CCB2C6BDBA200C4E9D7 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		6B91DBD32C35E153003396E0 /* SeriesViewListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesViewListItem.swift; sourceTree = "<group>"; };
 		6B91DBD62C35E1A6003396E0 /* SeriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesViewModel.swift; sourceTree = "<group>"; };
 		6B91DBD82C35E4D1003396E0 /* SerieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieDetailView.swift; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 			children = (
 				01B88837EE5090307C1FAB4B /* Assets.xcassets */,
 				292BCE1E949A720D80CC9A60 /* LaunchScreen.storyboard */,
+				6B133CCB2C6BDBA200C4E9D7 /* TODO.md */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
